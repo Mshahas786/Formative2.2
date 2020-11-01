@@ -110,7 +110,7 @@ $('#refresh').click(function(){
 
 
     $('#showChoice').click(function(){
-        var inputArray = [];
+        var inputArray = [ ];
       
         // read input of users and store
         var dog = $('#dog:checked').val();
@@ -162,6 +162,7 @@ $('#showSelection').click(function(){
   
   function allpets(){
     var i = 0;
+    $('#result').text(' ');
     for (i = 0 ; i < pets.length; i++){
 
   
@@ -169,7 +170,7 @@ $('#showSelection').click(function(){
       displayCards(i);
       cardModal();
     } //end of for loop
-    } //end of allpets function
+    }//end of allpets function
   
   
   
@@ -180,20 +181,20 @@ $('#showSelection').click(function(){
     function cardModal(){
   
       $('.moreDetails').click(function(){
-        $('#imageCat').text(' '); //clearing the content
+        $('#imagepets').text(' '); //clearing the content
         console.log(this.id);
-        var breed = '';
+        var species = '';
         var i=0;
-        for (i = 0; i < cats.length; i++) {
-          console.log(parseInt(this.id), cats[i].id);
-          if (parseInt(this.id) === cats[i].id) {
-            breed = cats[i].breed;
-            console.log(breed);
-            console.log(cats[i].id, cats[i].name, cats[i].breed);
-              $('#exampleModalLabel').text(cats[i].breed);
+        for (i = 0; i < pets.length; i++) {
+          console.log(parseInt(this.id), pets[i].id);
+          if (parseInt(this.id) === pets[i].id) {
+            species = pets[i].species;
+            console.log(species);
+            console.log(pets[i].id, pets[i].species);
+              $('#exampleModalLabel').text(pets[i].species);
               //append will keep  adding to existing content, so clear if you want
               //or else use html to replace existing content
-              $('#imageCat').append('<img class="img-fluid" src="images/' + cats[i].photo + '" alt="' + cats[i].breed + '"/>');
+              $('#imagepets').append('<img class="img-fluid" src="images/' + pets[i].photo + '" alt="' + pets[i].species + '"/>');
   
   
           } //end of if statement
@@ -217,7 +218,7 @@ $('#showSelection').click(function(){
   // Carousel
   // ==========================================================
   
-    function catCarousel(catBreed){
+    function petsCarousel(catBreed){
       var breedArray = [];
       $('#imageCat').text('');
       for (i = 0; i < cats.length; i++) {
@@ -263,16 +264,16 @@ $('#showSelection').click(function(){
   
   
   // ==========================================================
-  // Filter by cat type
+  // Filter by pet type
   // ==========================================================
   
-  function filteredpets(petsBreed){
-    console.log(petsBreed);
+  function filteredpets(petsSpecies){
+    console.log(petsSpecies);
     var i,j;
     $('#result').text(' ');
     for(i = 0 ; i < pets.length; i++) {
-      for (j = 0 ; j < petsBreed.length; j++){
-        if (petsBreed[j] === pets[i].breed) {
+      for (j = 0 ; j < petsSpecies.length; j++){
+        if (petsSpecies[j] === pets[i].species) {
           displayCards(i);
           cardModal();
         }//if
@@ -291,7 +292,7 @@ $('#showSelection').click(function(){
     $('#result').text(' ');
     for(i = 0 ; i < cats.length; i++) {
       for (j = 0 ; j < catBehaviour.length; j++){
-        console.log(catBehaviour[j], cats[i].behaviour)
+        console.log(catBehaviour[j], cats[i].behaviour);
         if (catBehaviour[j] === cats[i].behaviour) {
           displayCards(i);
           cardModal();
@@ -307,40 +308,25 @@ $('#showSelection').click(function(){
   // ==========================================================
   // Display cards
   // ==========================================================
-  
   function displayCards(j){
     //access properties of objects using index number
-          $('#pets').append('  <div class="card">'+
-         '<img src="images/' + pets[i].photo +'" class="card-img-top" alt="' + pets[i].breed + '">'+
+          $('#result').append('  <div class="card">'+
+         '<img src="images/' + pets[j].photo +'" class="card-img-top" alt="' + pets[j].breed + '">'+
          '<div class="card-body">'+
-           '<h3 class="card-title"> '+ pets[i].breed + ' </h3>'+
+           '<h3 class="card-title"> '+ pets[j].breed + ' </h3>'+
            
-           '<p class="card-text">  <span class="h5" > colors: </span>' + pets[i].colors +' <br> <span class="h5" > Temperament: </span> '+ pets[i].temperament +' </p>'+
-           '<button id="' + pets[i].id + '" type="button" class="btn btn-primary moreDetails" data-toggle="modal" data-target="#exampleModal">More about'+ " " + pets[i].breed + '</button>' +
+           '<p class="card-text">  <span class="h5" > colors: </span>' + pets[j].colors +' <br> <span class="h5" > Temperament: </span> '+ pets[j].temperament +' </p>'+
+           '<button id="' + pets[j].id + '" type="button" class="btn btn-primary moreDetails" data-toggle="modal" data-target="#exampleModal">More about'+ " " + pets[j].breed + '</button>' +
       '</div>'+
         '</div>'
 
-       ); // append ends here
+       );// append ends here
   
   
     }; //displayCards
   
 
+    
 
-    // var i = 0;
-    // for ( i = 0; i < pets.length; i++){
-    //    $('#pets').append('  <div class="card">'+
-    //      '<img src="images/' + pets[i].photo +'" class="card-img-top" alt="' + pets[i].breed + '">'+
-    //      '<div class="card-body">'+
-    //        '<h3 class="card-title"> '+ pets[i].breed + ' </h3>'+
-           
-    //        '<p class="card-text">  <span class="h5" > colors: </span>' + pets[i].colors +' <br> <span class="h5" > Temperament: </span> '+ pets[i].temperament +' </p>'+
-    //        '<button id="' + pets[i].id + '" type="button" class="btn btn-primary moreDetails" data-toggle="modal" data-target="#exampleModal">More about'+ " " + pets[i].breed + '</button>' +
-    //      '</div>'+
-    //    '</div>'
-
-    //    ); // append ends here
-
-    // }// end of loop
 
 });//$(document).ready(function

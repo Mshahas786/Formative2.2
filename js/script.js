@@ -154,6 +154,18 @@ $('#showSelection').click(function(){
     console.log(behaviour);
     filteredBehaviour(behaviour);
   });
+
+
+  $('#searchWord').click(function(){
+    $(this).val('');
+  });
+  
+  $('#searchIcon').click(function(){
+    var searchWord = $('#searchWord').val();
+    console.log(searchWord);
+    filterByWord(searchWord);
+  
+  });
   
   
   // ==========================================================
@@ -302,6 +314,25 @@ $('#showSelection').click(function(){
       }//for j
     }//for i
   }//filteredBehaviour
+
+
+  // ==========================================================
+// Filter by word
+// ==========================================================
+function filterByWord(word){
+  console.log(word);
+  var i,j;
+  $('#result').text('');
+  for (i = 0 ; i < pets.length; i++){
+    for (j = 0; j < pets[i].breed.length; j++){
+
+      if (word.toLowerCase() === pets[i].breed[j]){
+        displayCards(i);
+        cardModal();
+      }//if
+    }//for j
+  }//for i
+}//filterByWord
   
   
   
@@ -316,7 +347,7 @@ $('#showSelection').click(function(){
            '<h3 class="card-title"> '+ pets[j].breed + ' </h3>'+
            
            '<p class="card-text">  <span class="h5" > colors: </span>' + pets[j].colors +' <br> <span class="h5" > Temperament: </span> '+ pets[j].temperament +' </p>'+
-           '<button id="' + pets[j].id + '" type="button" class="btn btn-primary moreDetails" data-toggle="modal" data-target="#exampleModal">More about'+ " " + pets[j].breed + '</button>' +
+           '<button id="' + pets[j].id + '" type="button" class="btn btnColor moreDetails" data-toggle="modal" data-target="#exampleModal">More about'+ " " + pets[j].breed + '</button>' +
       '</div>'+
         '</div>'
 
@@ -329,4 +360,4 @@ $('#showSelection').click(function(){
     
 
 
-});//$(document).ready(function
+});

@@ -94,9 +94,16 @@ $(document).ready(function (){
 // Function call to display all items
 // ==========================================================
 
+$('input[type=checkbox]').prop('checked',false);
+allpets(); //displays all items on home page
+
+
+
+
 allpets(); //displays all items on home page
 
 $('#refresh').click(function(){
+  $('input[type=checkbox]').prop('checked',false);
   allpets();
 });
 
@@ -203,18 +210,18 @@ $('#showSelection').click(function(){
             species = pets[i].species;
             console.log(species);
             console.log(pets[i].id, pets[i].species);
-              $('#exampleModalLabel').text(pets[i].species);
+              $('#exampleModalLabel').text(pets[i].breed);
               //append will keep  adding to existing content, so clear if you want
               //or else use html to replace existing content
-              $('#imagepets').append('<img class="img-fluid" src="images/' + pets[i].photo + '" alt="' + pets[i].species + '"/>');
+              $('#imagepets').append('<img class="img-fluid" src="images/' + pets[i].photo + '" alt="' + pets[i].breed + '"/>');
   
   
           } //end of if statement
   
   
         }//end of for statement
-        console.log(breed);
-        catCarousel(breed);
+        console.log(species);
+        catCarousel(species);
   
   
   
@@ -232,18 +239,18 @@ $('#showSelection').click(function(){
   
     function petsCarousel(catBreed){
       var breedArray = [];
-      $('#imageCat').text('');
+      $('#imagepets').text('');
       for (i = 0; i < cats.length; i++) {
   
         if (cats[i].breed === catBreed) {
           breedArray.push(cats[i].photo);
           // console.log(cats[i].description);
-          $('#imageCat').append('<p class="text-danger lead">' + cats[i].description + '<p>' );
+          $('#imagepets').append('<p class="text-danger lead">' + cats[i].description + '<p>' );
         } //end of if
       } //end of for
   
       console.log(breedArray);
-      $('#imageCat').append(
+      $('#imagepets').append(
         '  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">' +
         '  <ol class="carousel-indicators">' +
         '    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>' +
@@ -324,13 +331,16 @@ function filterByWord(word){
   var i,j;
   $('#result').text('');
   for (i = 0 ; i < pets.length; i++){
-    for (j = 0; j < pets[i].breed.length; j++){
-
-      if (word.toLowerCase() === pets[i].breed[j]){
+    // for (j = 0; j < pets[i].length; j++){
+    console.log(word.toLowerCase(), pets[i].breed);
+    
+      if (word.toLowerCase() === pets[i].breed.toLowerCase()){
+        console.log(true);
+        
         displayCards(i);
         cardModal();
       }//if
-    }//for j
+    // }//for j
   }//for i
 }//filterByWord
   
@@ -347,7 +357,7 @@ function filterByWord(word){
            '<h3 class="card-title"> '+ pets[j].breed + ' </h3>'+
            
            '<p class="card-text">  <span class="h5" > colors: </span>' + pets[j].colors +' <br> <span class="h5" > Temperament: </span> '+ pets[j].temperament +' </p>'+
-           '<button id="' + pets[j].id + '" type="button" class="btn btnColor moreDetails" data-toggle="modal" data-target="#exampleModal">More about'+ " " + pets[j].breed + '</button>' +
+           '<button id="' + pets[j].id + '" type="button" class="btn btnColor text-light moreDetails" data-toggle="modal" data-target="#exampleModal">More about'+ " " + pets[j].breed + '</button>' +
       '</div>'+
         '</div>'
 
